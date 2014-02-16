@@ -3,3 +3,4 @@ South==0.8.4
 django-articles==2.4.1
 ipython==1.2.0
 wsgiref==0.1.2
+gunicorn==18.0
