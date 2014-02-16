@@ -1,22 +1,110 @@
+@font-face {
+  font-family: Armata;
+  src: url('/static/fonts/Armata-Regular.otf');
+  font-weight: normal;
+}
+@font-face {
+  font-family: Quicksand;
+  src: url('/static/fonts/Quicksand-Regular.otf');
+}
+@font-face {
+  font-family: 'Quicksand Light';
+  src: url('/static/fonts/Quicksand-Light.otf');
+}
+@font-face {
+  font-family: AftaSans;
+  src: url('/static/fonts/AftaSansThin-Regular.otf');
+}
+@font-face {
+  font-family: DuruSans;
+  src: url('/static/fonts/DuruSans-Regular.otf');
+}
 
-
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+body {
+  font-family: DuruSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #f1f1f1;
+  padding-top: 40px;
+  padding-bottom: 0px;
+  font-size: 15px;
+}
+h2 {
+  font-family: AftaSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: solid 1px #f1f1f1;
+  text-transform: uppercase;
+  color: rgb(89, 99, 172);
+}
+#main-content {
+  float: left;
+  background-color: #fff;
+  min-height: 500px;
+  padding: 10px 30px;
+  box-shadow: 0px 0px 10px #d1d1d1;
+  -moz-box-shadow: 0px 0px 10px #d1d1d1;
+  -webkit-box-shadow: 0px 0px 10px #d1d1d1;
+  //border-left: solid 1px #d1d1d1;
+}
+.article{
+  margin-bottom: 20px;
+}
+#article-archives {
+  float: right;
+  font-family: AftaSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#article-archives ul {
+  padding-left: 10px;
+  
+}
+p.image {
+  text-align: center;
+}
+p.image img {
+  margin: 20px; 
+  max-width: 600px;
+  border: solid 1px #e1e1e1;
+  padding: 3px; 
+}
+#article-top-meta {
+  margin-top: -20px;
+  margin-bottom: 10px; 
+  font-size: 11px;
+  color: #aaa;
+}
+#article-top-meta ul {
+  list-style-type: none;
+  padding: 0px;
+}
+#article-top-meta ul > li {
+  //display: inline; 
+  padding-right: 20px;
+}
+.article-description {
+  font-family: Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  //font-weight: bold;
+  padding: 15px 0px;
+  //font-variant: small-caps;
+}
+#article-meta {
+  font-size: 13px;
+}
+#article-meta .share-this {
+  padding: 0px;
+}
+.navbar, 
+footer {
+  font-family: Armata, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.navbar-fixed-top a {
+  padding: 10px 15px !important;
+}
+footer {
+  padding: 10px 0px;
+  text-align: right;
+  color: #aaa;
+  font-size: 12px;
+}
+footer > div {
+  padding-right: 0px !important;
+}

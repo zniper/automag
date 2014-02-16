@@ -8,8 +8,15 @@
 {% endblock %}
 
 {% block content %}
-<div id="article-archives">
-    <h2 class="title">{% trans 'Article Archives' %}</h2>
+
+<div class="row">
+
+<div id="main-content" class="col-sm-10 col-md-10 col-lg-10">
+{% block articles-content %}{% endblock %}
+</div>
+
+<div id="article-archives" class="col-sm-2 col-md-2 col-lg-2">
+    <h4 class="title">{% trans 'Archives' %}</h4>
     {% get_article_archives as archives %}
     {% for year in archives %}
     {% if forloop.first %}<ul>{% endif %}
@@ -26,7 +33,9 @@
     {% endfor %}
 </div>
 
-{% block articles-content %}{% endblock %}
+</div>
+
+<div class="clearfix"></div>
 
 {% if paginator and page_obj %}
 {% ifnotequal paginator.page_range|length 1 %}
@@ -47,24 +56,10 @@
 {% endfor %}
 {% endifnotequal %}
 {% endif %}
+
 {% endblock %}
 
 {% block footer %}
-{{ block.super }}
-
-<script type="application/javascript">
-//<![CDATA[
-(function() {
-    var links = document.getElementsByTagName('a');
-    var query = '?';
-    for(var i = 0; i < links.length; i++) {
-    if(links[i].href.indexOf('#disqus_thread') >= 0) {
-        query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
-    }
-    }
-    document.write('<script charset="utf-8" type="application/javascript" src="http://disqus.com/forums/{{ disqus_forum }}/get_num_replies.js' + query + '"></' + 'script>');
-})();
-//]]>
-</script>
+    {{ block.super }}
 {% endblock %}
 

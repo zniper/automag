@@ -11,7 +11,7 @@
 <link rel="alternate" type="application/atom+xml" title="Blog Articles Tagged '{{ tag.name }}' Atom Feed" href="{% url articles_atom_feed_tag tag.rss_name %}" />{% endfor %}
 {% endblock %}
 
-{% block content %}
+{% block articles-content %}
 
 {% include 'articles/_article_content.html' %}
 {% include 'articles/_meta.html' %}

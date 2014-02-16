@@ -1,10 +1,17 @@
 {% load i18n %}
+{% load article_filters %}
+
 <div id="article-content" class="article">
     <h2 class="title">{% trans article.title %}</h2>
 
-    {{ article.rendered_content|safe }}
+    {% include 'articles/_top_meta.html' %}
+
+    <p class="article-description">{{ article.description }}</p>
+
+    {{ article.rendered_content|insert_images:article|safe }}
 </div>
 
+{% comment %}
 {% for att in article.attachments.all %}
 {% if forloop.first %}<div id="article-attachments">
     <h3>Attachments</h3>
@@ -16,4 +23,4 @@
     {% if forloop.last %}</ul>
 </div>{% endif %}
 {% endfor %}
-
+{% endcomment %}

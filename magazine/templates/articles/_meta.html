@@ -1,15 +1,32 @@
 {% load i18n humanize %}
 
 <div id="article-meta">
-  <h4>Meta</h4>
 
-  <p><strong>{% trans 'Published' %}</strong>: {{ article.publish_date|naturalday }}</p>
+  {% if article.use_addthis_button and article.addthis_username %}
+  <!-- AddThis Button BEGIN -->
+  <div class="share-this">
+    <script type="application/javascript">var addthis_pub="{{ article.addthis_username }}";</script>
+    <a href="http://www.addthis.com/bookmark.php?v=20" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s7.addthis.com/static/btn/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a>
+    <script type="application/javascript" src="http://s7.addthis.com/js/200/addthis_widget.js"></script>
+  </div>
+  <!-- AddThis Button END -->
+  {% endif %}
 
-  <p><strong>{% trans 'Author' %}</strong>: <a href="{% url articles_by_author article.author.username %}" title="{% trans 'Read other articles by this author' %}">{{ article.author.get_name }}</a></p>
+  <hr>
 
-  <p><strong>{% trans 'Comments' %}</strong>: <a href="#disqus_thread">&nbsp;</a></p>
-
-  <p><strong>{% trans 'Word Count' %}</strong>: {{ article.word_count|intcomma }}</p>
+  <!--
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = '9stuff';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink"><span class="logo-disqus">Disqus</span></a>
+  -->
 
   {% if article.get_next_article %}
   <p>
@@ -25,20 +42,12 @@
   </p>
   {% endif %}
 
-  {% if article.use_addthis_button and article.addthis_username %}
-  <!-- AddThis Button BEGIN -->
-  <div>
-    <script type="application/javascript">var addthis_pub="{{ article.addthis_username }}";</script>
-    <a href="http://www.addthis.com/bookmark.php?v=20" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s7.addthis.com/static/btn/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a>
-    <script type="application/javascript" src="http://s7.addthis.com/js/200/addthis_widget.js"></script>
-  </div>
-  <!-- AddThis Button END -->
-  {% endif %}
-
   <script type="application/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
 
+{% comment %}
   <h4>{% trans 'Tags' %}</h4>
   <p>{% if article.tags.count %}{% for tag in article.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}{% else %}None{% endif %}</p>
+{% endcomment %}
 
   {% for fu in article.followups.live %}
   {% if forloop.first %}<h4 class="hasfollowup-header">{% trans 'Follow-Up Articles' %}</h4>
