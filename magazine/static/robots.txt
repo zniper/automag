@@ -1,3 +1,6 @@
-# robotstxt.org/
-
 User-agent: *
+Disallow: /static/
+Disallow: /media/
+Disallow: /admin/
+
+
