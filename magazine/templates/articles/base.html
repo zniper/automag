@@ -25,7 +25,7 @@
 
     <div id="article-stats">
         {% if article.tags.count %}
-            <div class="tags">
+            <div class="article-tags">
                 <span class="glyphicon glyphicon-tags"></span>
                 {% for tag in article.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
             </div>
@@ -34,14 +34,14 @@
         {% if article.get_next_article %}
         <div class="next-article">
             <span class="glyphicon glyphicon-chevron-right"></span>
-            <a href="{{ article.get_next_article.get_absolute_url }}">{{ article.get_next_article.title }}</a>
+            <a href="{{ article.get_next_article.get_absolute_url }}">{{ article.get_next_article.title|truncatewords:5 }}</a>
         </div>
         {% endif %}
 
         {% if article.get_previous_article %}
         <div class="previous-article">
             <span class="glyphicon glyphicon-chevron-left"></span>
-            <a href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title }}</a>
+            <a href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title|truncatewords:5 }}</a>
         </div>
         {% endif %}
     </div>

@@ -74,6 +74,10 @@ a {
 #article-stats > div > span {
   padding-right: 5px;
 }
+#article-stats .next-article,
+#article-stats .previous-article {
+  font-weight: bold;;
+}
 p.image {
   text-align: center;
 }
@@ -153,4 +157,7 @@ footer > div {
 #bottom-next-prev .previous-article .glyphicon {
   color: #ccc;
   margin-right: 5px;
+}
+.article-tags a {
+  color: #aaa;
 }
