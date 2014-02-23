@@ -2,52 +2,32 @@
 
 <div id="article-meta">
 
-  {% if article.use_addthis_button and article.addthis_username %}
-  <!-- AddThis Button BEGIN -->
   <div class="share-this">
-    <script type="application/javascript">var addthis_pub="{{ article.addthis_username }}";</script>
-    <a href="http://www.addthis.com/bookmark.php?v=20" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s7.addthis.com/static/btn/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a>
-    <script type="application/javascript" src="http://s7.addthis.com/js/200/addthis_widget.js"></script>
+    <span class='st_email' displayText=''></span>
+    <span class='st_googleplus' displayText=''></span>
+    <span class='st_twitter' displayText=''></span>
+    <span class='st_facebook' displayText=''></span>
   </div>
-  <!-- AddThis Button END -->
-  {% endif %}
 
-  <hr>
-
-  <!--
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-    var disqus_shortname = '9stuff';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com" class="dsq-brlink"><span class="logo-disqus">Disqus</span></a>
-  -->
-
+  <div id="bottom-next-prev" class="clear-fix">
   {% if article.get_next_article %}
-  <p>
-    <strong>{% trans 'Next' %}</strong>:
-    <a href="{{ article.get_next_article.get_absolute_url }}">{{ article.get_next_article.title }}</a>
-  </p>
+    <div class="next-article">
+        <a href="{{ article.get_next_article.get_absolute_url }}">{{ article.get_next_article.title }}</a>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </div>
   {% endif %}
 
   {% if article.get_previous_article %}
-  <p>
-    <strong>{% trans 'Previous' %}</strong>:
-    <a href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title }}</a>
-  </p>
+    <div class="previous-article">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <a href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title }}</a>
+    </div>
   {% endif %}
+  </div>
 
-  <script type="application/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
+  <hr>
 
-{% comment %}
-  <h4>{% trans 'Tags' %}</h4>
-  <p>{% if article.tags.count %}{% for tag in article.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}{% else %}None{% endif %}</p>
-{% endcomment %}
+  {% include 'articles/_comments.html' %}
 
   {% for fu in article.followups.live %}
   {% if forloop.first %}<h4 class="hasfollowup-header">{% trans 'Follow-Up Articles' %}</h4>

@@ -3,20 +3,50 @@
 
 {% block extra-head %}
 {{ block.super }}
+
 <link rel="alternate" type="application/rss+xml" title="Latest Blog Articles RSS Feed" href="{% url articles_rss_feed_latest %}" />
 <link rel="alternate" type="application/atom+xml" title="Latest Blog Articles Atom Feed" href="{% url articles_atom_feed_latest %}" />
+
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "82302641-4b97-4871-96b2-b2abca1771e9", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+
 {% endblock %}
 
 {% block content %}
 
 <div class="row">
 
-<div id="main-content" class="col-sm-10 col-md-10 col-lg-10">
+<div id="main-content" class="col-sm-9 col-md-9 col-lg-9">
 {% block articles-content %}{% endblock %}
 </div>
 
-<div id="article-archives" class="col-sm-2 col-md-2 col-lg-2">
-    <h4 class="title">{% trans 'Archives' %}</h4>
+<div id="right-column" class="col-sm-3 col-md-3 col-lg-3">
+
+    <div id="article-stats">
+        {% if article.tags.count %}
+            <div class="tags">
+                <span class="glyphicon glyphicon-tags"></span>
+                {% for tag in article.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if article.get_next_article %}
+        <div class="next-article">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <a href="{{ article.get_next_article.get_absolute_url }}">{{ article.get_next_article.title }}</a>
+        </div>
+        {% endif %}
+
+        {% if article.get_previous_article %}
+        <div class="previous-article">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <a href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title }}</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <h5 class="title">{% trans 'Archives' %}</h5>
     {% get_article_archives as archives %}
     {% for year in archives %}
     {% if forloop.first %}<ul>{% endif %}
@@ -24,7 +54,7 @@
             <strong>{{ year.0 }}</strong>
             <ul class="months">
             {% for month in year.1 %}
-                <li><a href="{% url articles_in_month month.year,month.month %}" title="{% trans 'View articles posted in this month' %}">{{ month|date:"N" }}</a></li>
+                <li><a href="{% url articles_in_month month.year,month.month %}" title="{% trans 'View articles posted in this month' %}">{{ month|date:"F" }}</a></li>
             {% endfor %}
             </ul>
             <div class="clear">&nbsp;</div>

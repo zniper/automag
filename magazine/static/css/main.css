@@ -25,7 +25,7 @@ body {
   background-color: #f1f1f1;
   padding-top: 40px;
   padding-bottom: 0px;
-  font-size: 15px;
+  font-size: 14px;
 }
 h2 {
   font-family: AftaSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -34,6 +34,9 @@ h2 {
   border-bottom: solid 1px #f1f1f1;
   text-transform: uppercase;
   color: rgb(89, 99, 172);
+}
+a {
+  color: #4F5AA7;
 }
 #main-content {
   float: left;
@@ -49,13 +52,27 @@ h2 {
 .article{
   margin-bottom: 20px;
 }
-#article-archives {
+#right-column {
   float: right;
   font-family: AftaSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 90%;
+  padding-top: 15px;
+  padding-left: 20px;
 }
-#article-archives ul {
+#right-column ul {
   padding-left: 10px;
   
+}
+#article-stats {
+  padding-top: 5px;
+}
+#article-stats > div {
+  border-bottom: 1px solid #e9e9e9;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+#article-stats > div > span {
+  padding-right: 5px;
 }
 p.image {
   text-align: center;
@@ -82,16 +99,15 @@ p.image img {
 }
 .article-description {
   font-family: Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  //font-weight: bold;
+  font-size: 14px;
   padding: 15px 0px;
-  //font-variant: small-caps;
 }
 #article-meta {
   font-size: 13px;
 }
 #article-meta .share-this {
   padding: 0px;
+  text-align: right;
 }
 .navbar, 
 footer {
@@ -108,4 +124,33 @@ footer {
 }
 footer > div {
   padding-right: 0px !important;
+}
+#article-stats .glyphicon {
+  color: #ccc;
+  margin-right: 10px;
+}
+#bottom-next-prev {
+  padding: 13px 0px;
+  font-size: 12px;
+}
+#bottom-next-prev .next-article,
+#bottom-next-prev .previous-article {
+  text-transform: uppercase;
+  font-size: 12px;
+  width: 50%;
+}
+#bottom-next-prev .next-article {
+  float: right;
+  text-align: right;
+}
+#bottom-next-prev .previous-article {
+  float: left;
+}
+#bottom-next-prev .next-article .glyphicon {
+  color: #ccc;
+  margin-left: 5px;
+}
+#bottom-next-prev .previous-article .glyphicon {
+  color: #ccc;
+  margin-right: 5px;
 }
