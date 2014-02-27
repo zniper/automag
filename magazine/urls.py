@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),
     url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico')),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
@@ -36,3 +37,13 @@ urlpatterns += patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
         {'sitemaps': sitemaps})
 )
+
+
+# TINYMCE 
+# -------
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
