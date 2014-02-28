@@ -13,7 +13,7 @@ class PageForm(FlatpageForm):
     class Meta:
         model = FlatPage
         widgets = {
-            'content': TinyMCE(attrs={'cols': 100, 'rows': 15}),
+            'content': TinyMCE(attrs={'cols': 120, 'rows': 30}),
         }
 
 
@@ -25,7 +25,7 @@ class ArticleForm(ArticleAdminForm):
     class Meta:
         model = Article
         widgets = {
-            'content': TinyMCE(attrs={'cols': 100, 'rows': 15}),
+            'content': TinyMCE(attrs={'cols': 120, 'rows': 30}),
         }
 
 

@@ -178,6 +178,17 @@ LOGGING = {
     }
 }
 
+# TINY MCE
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+    'browser_spellcheck': False,
+    'force_p_newlines': True,
+}
+TINYMCE_SPELLCHECKER = False
+
 try:
     from local_settings import *
 except ImportError:

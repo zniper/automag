@@ -52,6 +52,13 @@ a {
 .article{
   margin-bottom: 20px;
 }
+.article ul, 
+.article ol {
+  margin-left: 30px;
+}
+.article li {
+  list-style: inherit;
+}
 #right-column {
   float: right;
   font-family: AftaSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
