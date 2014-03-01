@@ -15,7 +15,12 @@ def insert_article_images(value, article):
 
     def build_tags(url='', alt=''):
         if url:
-            content = """<p class="image"><img src="%s" alt="%s"><p>""" % (url, alt)
+            content = """
+                <p class="image">
+                  <a class="photoset" href="%(url)s" title="%(alt)s">
+                    <img src="%(url)s" alt="%(alt)s">
+                  </a>
+                <p>""" % {'url':url, 'alt':alt}
         else:
             content = """<p class="image"><img src="/static/img/no-image.png"><p>"""
         return content

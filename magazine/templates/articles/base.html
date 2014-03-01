@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-{% load article_tags i18n %}
+{% load article_tags i18n staticfiles %}
 
 {% block extra-head %}
 {{ block.super }}
+
+<link rel="stylesheet" href="{% static 'css/colorbox.css' %}">
 
 <link rel="alternate" type="application/rss+xml" title="Latest Blog Articles RSS Feed" href="{% url articles_rss_feed_latest %}" />
 <link rel="alternate" type="application/atom+xml" title="Latest Blog Articles Atom Feed" href="{% url articles_atom_feed_latest %}" />
