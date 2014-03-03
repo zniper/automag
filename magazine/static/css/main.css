@@ -27,6 +27,7 @@ body {
   padding-bottom: 0px;
   font-size: 14px;
 }
+h1,
 h2 {
   font-family: AftaSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-bottom: 30px;
@@ -34,6 +35,9 @@ h2 {
   border-bottom: solid 1px #f1f1f1;
   text-transform: uppercase;
   color: rgb(89, 99, 172);
+}
+h1 {
+  font-size: 27px;
 }
 a {
   color: #4F5AA7;

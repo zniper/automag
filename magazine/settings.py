@@ -193,8 +193,7 @@ TINYMCE_SPELLCHECKER = False
 
 # COMPRESSOR 
 
-COMPRESS_ENABLED = True
-#COMPRESS_ROOT = 
+COMPRESS_ROOT = os.path.join(PROJECT_DIR, 'static.cache')
 
 try:
     from local_settings import *
