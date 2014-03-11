@@ -26,7 +26,10 @@ class PageAdmin(FlatPageAdmin):
 
 class ArticleForm(ArticleAdminForm):
     
-    category = forms.ModelMultipleChoiceField(Category.objects.all())
+    category = forms.ModelMultipleChoiceField(
+        Category.objects.all(),
+        widget=forms.CheckboxSelectMultiple(),
+        )
 
     class Meta:
         model = Article

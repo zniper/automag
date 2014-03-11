@@ -12,7 +12,6 @@ class Category(models.Model):
 
     def __unicode__(self):
         return self.name
-            
 
 
 class Article(CoreArticle):
@@ -22,4 +21,3 @@ class Article(CoreArticle):
 
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
-        
