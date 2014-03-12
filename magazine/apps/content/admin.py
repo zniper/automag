@@ -5,11 +5,9 @@ from django.contrib.flatpages.forms import FlatpageForm
 from django import forms
 from articles.admin import ArticleAdmin as CoreArticleAdmin
 from articles.forms import ArticleAdminForm
+from tinymce.widgets import TinyMCE
 
 from apps.content.models import Article, Category
-
-
-from tinymce.widgets import TinyMCE
 
 
 class PageForm(FlatpageForm):
@@ -25,11 +23,13 @@ class PageAdmin(FlatPageAdmin):
 
 
 class ArticleForm(ArticleAdminForm):
-    
-    category = forms.ModelMultipleChoiceField(
+    categories = forms.ModelMultipleChoiceField(
         Category.objects.all(),
-        widget=forms.CheckboxSelectMultiple(),
+        #widget=forms.CheckboxSelectMultiple(),
         )
+
+    def __init__(self, *args, **kwargs):
+        super(ArticleForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Article
@@ -43,7 +43,7 @@ class ArticleAdmin(CoreArticleAdmin):
     fieldsets = (
         (None, {'fields': ('title', 'content', 'tags', 'auto_tag', 'markup', 'status')}),
         ('Metadata', {
-            'fields': ('keywords', 'description', 'category'),
+            'fields': ('keywords', 'description', 'categories'),
             'classes': ('collapse',)
         }),
         ('Relationships', {

@@ -8,7 +8,7 @@ class Category(models.Model):
     description = models.TextField(blank=True)
 
     class Meta:
-        verbose_name = 'Categorie'
+        verbose_name_plural = 'Categories'
 
     def __unicode__(self):
         return self.name
@@ -16,8 +16,4 @@ class Category(models.Model):
 
 class Article(CoreArticle):
     """docstring for Article"""
-
     categories = models.ManyToManyField('Category')
-
-    def __init__(self, *args, **kwargs):
-        super(Article, self).__init__(*args, **kwargs)
