@@ -3,9 +3,12 @@ from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.forms import FlatpageForm
 from django import forms
+
+from tinymce.widgets import TinyMCE
+
 from articles.admin import ArticleAdmin as CoreArticleAdmin
 from articles.forms import ArticleAdminForm
-from tinymce.widgets import TinyMCE
+import articles.models
 
 from apps.content.models import Article, Category
 
@@ -20,6 +23,12 @@ class PageForm(FlatpageForm):
 
 class PageAdmin(FlatPageAdmin):
     form = PageForm
+
+
+class AttachmentInline(admin.TabularInline):
+    model = articles.models.Attachment
+    extra = 5
+    max_num = 25
 
 
 class ArticleForm(ArticleAdminForm):
@@ -60,15 +69,25 @@ class ArticleAdmin(CoreArticleAdmin):
             'classes': ('collapse',)
         }),
     )
+    inlines = [AttachmentInline,]
 
 
-try:
-    from articles.models import Article as CoreArticle
-    admin.site.unregister(CoreArticle)
-except:
-    pass
-admin.site.unregister(FlatPage)
 
-admin.site.register(FlatPage, PageAdmin)
-admin.site.register(Article, ArticleAdmin)
+def replace_model_admin(klass, new_klass):
+    try:
+        admin.site.unregister(klass)
+    except:
+        pass
+    finally:
+        admin.site.register(*new_klass)
+
+
+replace_model_admin(articles.models.Article, (Article, ArticleAdmin))
+replace_model_admin(FlatPage, (FlatPage, PageAdmin))
 admin.site.register(Category)
+
+#try:
+#    from articles.models import Article as CoreArticle
+#    admin.site.unregister(CoreArticle)
+#except:
+#    pass
