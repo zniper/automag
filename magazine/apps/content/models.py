@@ -5,6 +5,7 @@ from articles.models import Article as CoreArticle
 
 class Category(models.Model):
     name = models.CharField(max_length=128)
+    slug = models.CharField(max_length=128)
     description = models.TextField(blank=True)
 
     class Meta:

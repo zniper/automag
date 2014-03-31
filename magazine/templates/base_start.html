@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load compress %}
+{% load thumbnail %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -27,20 +28,29 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-    <div id="top-navigation" class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+    <div id="header" class="">
+
+      {% block top-banner %}
+        <div class="top-banner">
+           {% thumbnail 'http://'|add:request.get_host|add:STATIC_URL|add:'img/banner-0.jpg' "1170x130" crop="center 90%" as thumb %}
+           <img src="{{ thumb.url }}"> 
+           {% endthumbnail %}
+        </div>
+      {% endblock %}
+
+      <div class="top-nav row">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="/">{% block site-name %}{% endblock %}</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#archive">Archive</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="/category/news">News</a></li>
+            <li><a href="/category/culture">Culture</a></li>
+            <li><a href="/category/architecture">Architecture</a></li>
+            <li><a href="/category/art">Art</a></li>
+            <li><a href="/category/nature">Nature</a></li>
+            <li><a href="/category/history">History</a></li>
+            <li><a href="/category/activities">Activities</a></li>
           </ul>
 
           {% comment %}
@@ -54,8 +64,12 @@
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>
           {% endcomment %}
-
         </div><!--/.navbar-collapse -->
+        <!--div id="navbar-search">
+            <form action="" method="POST">
+                <input type="text" value="">
+            </form>
+        </div-->
       </div>
     </div>
 

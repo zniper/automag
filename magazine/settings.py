@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     'articles',
     'tinymce',
     'compressor',
+    'sorl.thumbnail',
 )
 
 # A sample logging configuration. The only tangible logging
