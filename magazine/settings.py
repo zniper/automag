@@ -181,6 +181,10 @@ LOGGING = {
     }
 }
 
+# ARTICLES
+ARTICLE_AUTO_TAG = False
+
+
 # TINY MCE
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table,paste,searchreplace",

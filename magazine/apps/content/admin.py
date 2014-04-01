@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import admin
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.admin import FlatPageAdmin
@@ -8,9 +10,11 @@ from tinymce.widgets import TinyMCE
 
 from articles.admin import ArticleAdmin as CoreArticleAdmin
 from articles.forms import ArticleAdminForm
-import articles.models
+from articles import models as core_models
 
-from apps.content.models import Article, Category
+from models import Article, Category
+
+log = logging.getLogger('articles.forms')
 
 
 class PageForm(FlatpageForm):
@@ -26,7 +30,7 @@ class PageAdmin(FlatPageAdmin):
 
 
 class AttachmentInline(admin.TabularInline):
-    model = articles.models.Attachment
+    model = core_models.Attachment
     extra = 5
     max_num = 25
 
@@ -45,6 +49,15 @@ class ArticleForm(ArticleAdminForm):
         widgets = {
             'content': TinyMCE(attrs={'cols': 120, 'rows': 30}),
         }
+
+    def clean_tags(self):
+        """Turns the string of tags into a list"""
+        tags = [tag(t.strip()) for t in self.cleaned_data['tags'].split()
+            if len(t.strip())]
+        log.debug('Tagging Article %s with: %s' %
+            (self.cleaned_data.get('title', ''), tags))
+        self.cleaned_data['tags'] = tags
+        return self.cleaned_data['tags']
 
 
 class ArticleAdmin(CoreArticleAdmin):
@@ -82,8 +95,9 @@ def replace_model_admin(klass, new_klass):
         admin.site.register(*new_klass)
 
 
-replace_model_admin(articles.models.Article, (Article, ArticleAdmin))
+replace_model_admin(core_models.Article, (Article, ArticleAdmin))
 replace_model_admin(FlatPage, (FlatPage, PageAdmin))
+
 admin.site.register(Category)
 
 #try:
