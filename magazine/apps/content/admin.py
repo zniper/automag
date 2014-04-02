@@ -9,7 +9,7 @@ from django import forms
 from tinymce.widgets import TinyMCE
 
 from articles.admin import ArticleAdmin as CoreArticleAdmin
-from articles.forms import ArticleAdminForm
+from articles.forms import ArticleAdminForm, tag
 from articles import models as core_models
 
 from models import Article, Category
