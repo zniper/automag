@@ -2,12 +2,12 @@
 {% load thumbnail %}
 
 <div class="entry-small clearfix">
-    <div class="entry-images">
+    <div class="entry-images col-xs-3 col-sm-3">
       {% thumbnail article.attachments.all.0.attachment "90x70" crop="top" as thumb %}  
         <img src="{{ thumb.url }}">
       {% endthumbnail %}
     </div>
-    <div class="entry-title">
+    <div class="entry-title col-xs-9 col-sm-9">
         <a href="{{ article.get_absolute_url }}" title="{% trans 'Read this related article' %}">{{ article.title }}</a> 
         <div class="entry-date">
             {{ ra.publish_date|naturalday }} 
