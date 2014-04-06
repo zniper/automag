@@ -31,7 +31,7 @@
     <div id="header" class="">
 
       {% block top-banner %}
-        <div class="top-banner">
+        <div class="top-banner col-sm-12 col-md-12 col-lg-12">
            {% thumbnail 'http://'|add:request.get_host|add:STATIC_URL|add:'img/banner-0.jpg' "1170x130" crop="center 90%" as thumb %}
            <img class="hidden-xs" src="{{ thumb.url }}"> 
            {% endthumbnail %}
