@@ -37,6 +37,7 @@
     {% endfor %}
   {% endcomment %}
 
+  {% if article.related_articles.live.count %}
   <div class="bottom-content">
     {% for ra in article.related_articles.live %}
     {% if forloop.first %}<h5 class="box-header">{% trans 'Related Articles' %}</h5>
@@ -47,6 +48,7 @@
     {% if forloop.last %}</ul>{% endif %}
     {% endfor %}
   </div>
+  {% endif %}
 
   {% comment %}
     {% for url,title in article.links %}

@@ -49,6 +49,7 @@
         {% endif %}
     </div>
 
+    {% if article.related_articles.live.count %}
     <div class="side-content">
         <h5 class="box-header">{% trans 'Related Articles' %}</h5>
         {% for ra in article.related_articles.live %}
@@ -57,6 +58,7 @@
         {% if forloop.last %}</ul>{% endif %}
         {% endfor %}
     </div>
+    {% endif %}
 
     <div class="side-content">
         <h5 class="box-header">{% trans 'Latest Articles' %}</h5>
