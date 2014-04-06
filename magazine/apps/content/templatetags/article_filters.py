@@ -16,13 +16,13 @@ def insert_article_images(value, article):
     def build_tags(url='', alt=''):
         if url:
             content = """
-                <p class="image">
+                <div class="article-image col-xs-12 col-sm-12 clearfix">
                   <a class="photoset" href="%(url)s" title="%(alt)s">
                     <img src="%(url)s" alt="%(alt)s">
                   </a>
-                <p>""" % {'url':url, 'alt':alt}
+                </div>""" % {'url':url, 'alt':alt}
         else:
-            content = """<p class="image"><img src="/static/img/no-image.png"><p>"""
+            content = """<div class="article-image col-xs-12 col-sm-12 clearfix"><img src="/static/img/no-image.png"><div>"""
         return content
 
     imgs = rg_images.findall(value)

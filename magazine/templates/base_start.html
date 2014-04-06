@@ -11,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{% block title %}{% endblock %}</title>
         <meta name="description" content="{% block meta-description %}{% endblock %}">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
 
         {% compress css %}
@@ -33,43 +33,45 @@
       {% block top-banner %}
         <div class="top-banner">
            {% thumbnail 'http://'|add:request.get_host|add:STATIC_URL|add:'img/banner-0.jpg' "1170x130" crop="center 90%" as thumb %}
-           <img src="{{ thumb.url }}"> 
+           <img class="hidden-xs" src="{{ thumb.url }}"> 
            {% endthumbnail %}
         </div>
       {% endblock %}
 
-      <div class="top-nav row">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">{% block site-name %}{% endblock %}</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/category/news">News</a></li>
-            <li><a href="/category/culture">Culture</a></li>
-            <li><a href="/category/architecture">Architecture</a></li>
-            <li><a href="/category/art">Art</a></li>
-            <li><a href="/category/nature">Nature</a></li>
-            <li><a href="/category/history">History</a></li>
-            <li><a href="/category/activities">Activities</a></li>
-          </ul>
+      <div class="top-nav">
+        <div class="container">
+            <div class="navbar-brand col-sm-1">
+                <a href="/">{% block site-name %}{% endblock %}</a>
+            </div>
+            <div class="navbar-collapse collapse col-sm-11">
+                <ul class="nav navbar-nav">
+                    <li><a href="/category/news">News</a></li>
+                    <li><a href="/category/culture">Culture</a></li>
+                    <li><a href="/category/architecture">Architecture</a></li>
+                    <li><a href="/category/art">Art</a></li>
+                    <li><a href="/category/nature">Nature</a></li>
+                    <li><a href="/category/history">History</a></li>
+                    <li><a href="/category/activities">Activities</a></li>
+                </ul>
 
-          {% comment %}
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-          {% endcomment %}
-        </div><!--/.navbar-collapse -->
-        <!--div id="navbar-search">
-            <form action="" method="POST">
-                <input type="text" value="">
-            </form>
-        </div-->
+                {% comment %}
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                    <input type="text" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">Sign in</button>
+                </form>
+                {% endcomment %}
+            </div><!--/.navbar-collapse -->
+            <!--div id="navbar-search">
+                <form action="" method="POST">
+                    <input type="text" value="">
+                </form>
+            </div-->
+        </div>
       </div>
     </div>
 

@@ -37,14 +37,14 @@
         {% if article.get_next_article %}
         <div class="next-article">
             <span class="glyphicon glyphicon-chevron-right"></span>
-            <a class="entry-title" href="{{ article.get_next_article.get_absolute_url }}">{{ article.get_next_article.title|truncatewords:5 }}</a>
+            <a class="entry-title" href="{{ article.get_next_article.get_absolute_url }}">{{ article.get_next_article.title|truncatewords:7 }}</a>
         </div>
         {% endif %}
 
         {% if article.get_previous_article %}
         <div class="previous-article">
             <span class="glyphicon glyphicon-chevron-left"></span>
-            <a class="entry-title" href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title|truncatewords:5 }}</a>
+            <a class="entry-title" href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title|truncatewords:7 }}</a>
         </div>
         {% endif %}
     </div>
@@ -54,7 +54,7 @@
         <h5 class="box-header">{% trans 'Related Articles' %}</h5>
         {% for ra in article.related_articles.live %}
         {% if forloop.first %}<ul class="related-articles">{% endif %}
-            <li> {% include 'partials/article_entry_small.html' with article=ra %} </li>
+            <li class="{% cycle 'row-even' 'row-odd' %}"> {% include 'partials/article_entry_small.html' with article=ra %} </li>
         {% if forloop.last %}</ul>{% endif %}
         {% endfor %}
     </div>
@@ -65,7 +65,7 @@
         {% get_latest_articles 5 as latest_articles %} 
         {% for ra in latest_articles %}
             {% if forloop.first %}<ul class="related-articles">{% endif %}
-                <li> {% include 'partials/article_entry_small.html' with article=ra %} </li>
+                <li class="{% cycle 'row-even' 'row-odd' %}"> {% include 'partials/article_entry_small.html' with article=ra %} </li>
             {% if forloop.last %}</ul>{% endif %}
         {% endfor %}
     </div>

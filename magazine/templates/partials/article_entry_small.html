@@ -1,9 +1,9 @@
 {% load i18n humanize %}
 {% load thumbnail %}
 
-<div class="entry-small row-fluid clearfix">
+<div class="entry-small clearfix">
     <div class="entry-images">
-      {% thumbnail article.attachments.all.0.attachment "70x60" crop="center" as thumb %}  
+      {% thumbnail article.attachments.all.0.attachment "90x70" crop="top" as thumb %}  
         <img src="{{ thumb.url }}">
       {% endthumbnail %}
     </div>
