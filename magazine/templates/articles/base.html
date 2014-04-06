@@ -1,65 +1,90 @@
 {% extends 'base.html' %}
 {% load article_tags i18n staticfiles %}
+{% load i18n humanize %}
+{% load magazine_tags %}
 
 {% block extra-head %}
-{{ block.super }}
+    {{ block.super }}
 
-<link rel="stylesheet" href="{% static 'css/colorbox.css' %}">
+    <link rel="stylesheet" href="{% static 'css/colorbox.css' %}">
 
-<link rel="alternate" type="application/rss+xml" title="Latest Blog Articles RSS Feed" href="{% url articles_rss_feed_latest %}" />
-<link rel="alternate" type="application/atom+xml" title="Latest Blog Articles Atom Feed" href="{% url articles_atom_feed_latest %}" />
-
+    <link rel="alternate" type="application/rss+xml" title="Latest Blog Articles RSS Feed" href="{% url articles_rss_feed_latest %}" />
+    <link rel="alternate" type="application/atom+xml" title="Latest Blog Articles Atom Feed" href="{% url articles_atom_feed_latest %}" />
 {% endblock %}
 
 {% block content %}
 
 <div class="row">
 
-<div id="main-content" class="col-sm-9 col-md-9 col-lg-9">
-{% block articles-content %}{% endblock %}
-</div>
-
-<div id="right-column" class="col-sm-3 col-md-3 col-lg-3">
-
-    <div id="article-stats">
-        {% if article.tags.count %}
-            <div class="article-tags">
-                <span class="glyphicon glyphicon-tags"></span>
-                {% for tag in article.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
-            </div>
-        {% endif %}
-
-        {% if article.get_next_article %}
-        <div class="next-article">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <a href="{{ article.get_next_article.get_absolute_url }}">{{ article.get_next_article.title|truncatewords:5 }}</a>
-        </div>
-        {% endif %}
-
-        {% if article.get_previous_article %}
-        <div class="previous-article">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <a href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title|truncatewords:5 }}</a>
-        </div>
-        {% endif %}
+    <div id="main-content" class="col-sm-9 col-md-9 col-lg-9">
+    {% block articles-content %}{% endblock %}
     </div>
 
-    <h5 class="title">{% trans 'Archives' %}</h5>
-    {% get_article_archives as archives %}
-    {% for year in archives %}
-    {% if forloop.first %}<ul>{% endif %}
-        <li>
-            <strong>{{ year.0 }}</strong>
-            <ul class="months">
-            {% for month in year.1 %}
-                <li><a href="{% url articles_in_month month.year,month.month %}" title="{% trans 'View articles posted in this month' %}">{{ month|date:"F" }}</a></li>
+    <div id="right-column" class="col-sm-3 col-md-3 col-lg-3">
+
+        <div id="article-stats">
+            {% if article.tags.count %}
+                <div class="article-tags">
+                    <span class="glyphicon glyphicon-tags"></span>
+                    {% for tag in article.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a> {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="side-content">
+            {% if article.get_next_article %}
+            <div class="next-article">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <a class="entry-title" href="{{ article.get_next_article.get_absolute_url }}">{{ article.get_next_article.title|truncatewords:5 }}</a>
+            </div>
+            {% endif %}
+
+            {% if article.get_previous_article %}
+            <div class="previous-article">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <a class="entry-title" href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title|truncatewords:5 }}</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="side-content">
+            <h5 class="box-header">{% trans 'Related Articles' %}</h5>
+            {% for ra in article.related_articles.live %}
+            {% if forloop.first %}<ul class="related-articles">{% endif %}
+                <li> {% include 'partials/article_entry_small.html' with article=ra %} </li>
+            {% if forloop.last %}</ul>{% endif %}
             {% endfor %}
-            </ul>
-            <div class="clear">&nbsp;</div>
-        </li>
-    {% if forloop.last %}</ul>{% endif %}
-    {% endfor %}
-</div>
+        </div>
+
+        <div class="side-content">
+            <h5 class="box-header">{% trans 'Latest Articles' %}</h5>
+            {% get_latest_articles 5 as latest_articles %} 
+            {% for ra in latest_articles %}
+                {% if forloop.first %}<ul class="related-articles">{% endif %}
+                    <li> {% include 'partials/article_entry_small.html' with article=ra %} </li>
+                {% if forloop.last %}</ul>{% endif %}
+            {% endfor %}
+        </div>
+
+        {% comment %}
+        <h5 class="title">{% trans 'Archives' %}</h5>
+        {% get_article_archives as archives %}
+        {% for year in archives %}
+        {% if forloop.first %}<ul>{% endif %}
+            <li>
+                <strong>{{ year.0 }}</strong>
+                <ul class="months">
+                {% for month in year.1 %}
+                    <li><a href="{% url articles_in_month month.year,month.month %}" title="{% trans 'View articles posted in this month' %}">{{ month|date:"F" }}</a></li>
+                {% endfor %}
+                </ul>
+                <div class="clear">&nbsp;</div>
+            </li>
+        {% if forloop.last %}</ul>{% endif %}
+        {% endfor %}
+        {% endcomment %}
+
+    </div>
 
 </div>
 

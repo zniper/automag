@@ -39,6 +39,9 @@ h2 {
 h1 {
   font-size: 27px;
 }
+h3, h4, h5 {
+  text-transform: uppercase;
+}
 a {
   color: #4F5AA7;
 }
@@ -70,7 +73,7 @@ a {
   padding-top: 15px;
   padding-left: 20px;
 }
-#right-column ul {
+#right-column > ul {
   padding-left: 10px;
   
 }
@@ -84,10 +87,6 @@ a {
 }
 #article-stats > div > span {
   padding-right: 5px;
-}
-#article-stats .next-article,
-#article-stats .previous-article {
-  font-weight: bold;;
 }
 p.image {
   text-align: center;
@@ -147,6 +146,8 @@ footer > div {
 #bottom-next-prev {
   padding: 13px 0px;
   font-size: 12px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 #bottom-next-prev .next-article,
 #bottom-next-prev .previous-article {
@@ -170,7 +171,7 @@ footer > div {
   margin-right: 5px;
 }
 .article-tags a {
-  color: #aaa;
+  color: #777;
 }
 .top-banner {
   //background-color: #333;
@@ -202,6 +203,7 @@ footer > div {
 }
 .top-nav .navbar-nav a {
   color: #03137E;
+  letter-spacing: 0.5px;
 }
 .top-nav .navbar-brand {
   font-size: 25px;
@@ -211,4 +213,55 @@ footer > div {
 }
 #big-boss {
   margin-top: 20px;
+}
+.side-content {
+  margin: 30px 0px 5px 0px;
+}
+.side-content .box-header {
+  text-align: right;
+  border-bottom: 1px dashed #ddd;
+}
+h5.box-header {
+  font-size: 12px;
+  margin-top: 15px;
+  padding-bottom: 5px;
+  color: #777;
+}
+.side-content ul {
+  list-style: none;
+  padding: 0px;
+}
+.side-content .related-articles li {
+  margin: 20px 0px;
+}
+.entry-small > div {
+  float: left;
+}
+.entry-small .entry-images {
+  width: 30%;
+}
+.entry-images img {
+  margin-right: 2px;
+  border: 1px solid #e7e7e7;
+  background-color: white;
+  padding: 2px;
+}
+.entry-title {
+  font-family: Cantarell;
+  padding: 0px 0 0 5px;
+  //letter-spacing: 0.5px;
+}
+.entry-small .entry-title {
+  width: 70%;
+}
+.entry-date {
+  margin-top: 5px;
+  font-family: DuruSans;
+  font-size: 80%; 
+  color: #aaa;
+}
+.bottom-content {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
 }

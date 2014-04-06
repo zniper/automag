@@ -1,0 +1,16 @@
+{% load i18n humanize %}
+{% load thumbnail %}
+
+<div class="entry-small row-fluid clearfix">
+    <div class="entry-images">
+      {% thumbnail article.attachments.all.0.attachment "70x60" crop="center" as thumb %}  
+        <img src="{{ thumb.url }}">
+      {% endthumbnail %}
+    </div>
+    <div class="entry-title">
+        <a href="{{ article.get_absolute_url }}" title="{% trans 'Read this related article' %}">{{ article.title }}</a> 
+        <div class="entry-date">
+            {{ ra.publish_date|naturalday }} 
+        </div>
+    </div>
+</div>
