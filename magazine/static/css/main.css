@@ -214,7 +214,7 @@ footer > div {
   color: #03137E;
 }
 #big-boss {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 .side-content {
   margin: 30px 0px 5px 0px;
@@ -242,6 +242,7 @@ h5.box-header {
 .entry-small .entry-images {
   float: right;
   text-align: right;
+  padding: 0;
 }
 .entry-small .entry-title {
   float: left;
@@ -253,16 +254,6 @@ h5.box-header {
   background-color: white;
   padding: 3px;
 }
-.entry-title {
-  font-family: Cantarell;
-  font-size: 14px;
-}
-.entry-date {
-  margin-top: 5px;
-  font-family: DuruSans;
-  font-size: 80%; 
-  color: #aaa;
-}
 .bottom-content {
   border-bottom: 1px solid #ddd;
   padding-bottom: 5px;
@@ -270,4 +261,57 @@ h5.box-header {
 }
 .row-even {
   background-color: #f9f9f9;
+}
+
+/* GENERAL ARTICLE */
+
+.entry-title {
+  font-family: Cantarell;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.entry-date {
+  margin-top: 5px;
+  font-family: DuruSans;
+  font-size: 80%; 
+  color: #aaa;
+}
+.entry-description {
+  font-family: Cantarell;
+  font-size: 14px;
+}
+.entry-category {
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+.entry-cover {
+  margin: 10px 0;
+}
+
+/* HOME PAGE */
+
+.cat-block {
+  display: block;
+  padding: 5px;
+}
+.cat-block-inner {
+  background-color: #fafafa;
+  box-shadow: 1px 1px 3px #e7e7e7;
+  -moz-box-shadow: 1px 1px 3px #e7e7e7;
+  -webkit-box-shadow: 1px 1px 3px #e7e7e7;
+  padding: 5px 10px;
+  overflow: hidden;
+  min-height: 190px;
+}
+#categories-latests {
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+#home-latests {
+  background: #fafafa;
+  padding: 5px 20px;
+}
+#home-latests > div {
+  margin-bottom: 20px;
 }

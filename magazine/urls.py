@@ -2,14 +2,15 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 
-from apps.content.views import CategoryView
+from apps.content.views import CategoryView, HomeView
 
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', HomeView.as_view()),
     url(r'^', include('articles.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),

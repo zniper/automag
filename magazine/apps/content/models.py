@@ -14,6 +14,10 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_latest_articles(self, number=1):
+        qset = Article.objects.filter(categories=self, status__is_live=True)
+        return qset.order_by('-publish_date')[:number]
+
 
 class Article(CoreArticle):
     """docstring for Article"""
