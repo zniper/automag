@@ -30,7 +30,8 @@ class HomeView(TemplateView):
         categories = Category.objects.all()
         cat_latest = []
         for cat in categories:
-            cat_latest.append((cat.id, cat.name, cat.get_latest_articles()))
+            cat_latest.append((cat.id, cat.slug, cat.name,
+                               cat.get_latest_articles()))
         context['categories_latest'] = cat_latest[:6]
 
         # get few latest articles

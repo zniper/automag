@@ -8,8 +8,16 @@
   src: url('/static/fonts/Quicksand-Regular.otf');
 }
 @font-face {
+  font-family: 'Quicksand Bold';
+  src: url('/static/fonts/Quicksand-Bold.otf');
+}
+@font-face {
   font-family: 'Quicksand Light';
   src: url('/static/fonts/Quicksand-Light.otf');
+}
+@font-face {
+  font-family: 'Quicksand Dash';
+  src: url('/static/fonts/Quicksand_Dash.otf');
 }
 @font-face {
   font-family: AftaSans;
@@ -18,6 +26,14 @@
 @font-face {
   font-family: DuruSans;
   src: url('/static/fonts/DuruSans-Regular.otf');
+}
+@font-face {
+  font-family: HansKendrick;
+  src: url('/static/fonts/HansKendrick-Regular.otf');
+}
+@font-face {
+  font-family: Anke;
+  src: url('/static/fonts/Anke.otf');
 }
 
 body {
@@ -39,7 +55,7 @@ h2 {
 h1 {
   font-size: 27px;
 }
-h3, h4, h5 {
+h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 a {
@@ -113,7 +129,8 @@ a {
   padding-right: 20px;
 }
 .article-description {
-  font-family: Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  //font-family: Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Anker, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   padding: 15px 0px;
 }
@@ -277,7 +294,7 @@ h5.box-header {
   color: #aaa;
 }
 .entry-description {
-  font-family: Cantarell;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
 }
 .entry-category {
@@ -297,9 +314,9 @@ h5.box-header {
 }
 .cat-block-inner {
   background-color: #fafafa;
-  box-shadow: 1px 1px 3px #e7e7e7;
-  -moz-box-shadow: 1px 1px 3px #e7e7e7;
-  -webkit-box-shadow: 1px 1px 3px #e7e7e7;
+  box-shadow: 1px 1px 4px #ccc;
+  -moz-box-shadow: 1px 1px 4px #ccc;
+  -webkit-box-shadow: 1px 1px 4px #ccc;
   padding: 5px 10px;
   overflow: hidden;
   min-height: 190px;
@@ -312,6 +329,47 @@ h5.box-header {
   background: #fafafa;
   padding: 5px 20px;
 }
-#home-latests > div {
-  margin-bottom: 20px;
+#home-latests h5 {
+  font-family: 'Quicksand Light';
+}
+
+/* LIST VIEWS */
+
+.article-list-entry {
+  margin-bottom: 25px;
+}
+.entry-topline {
+  border-top: 1px solid #ffde99; 
+  margin: 15px 0px 0px;
+  line-height: 18px;
+  color: #999;
+}
+.entry-topline h6 {
+  font-family: Quicksand;
+  font-size: 10px;
+  margin: 0px;
+  padding: 0px;
+  line-height: 20px;
+}
+.article-list-entry h4 {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  text-transform: inherit;
+  font-family: Anke, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+}
+
+/* SOCIAL LINKS */
+
+.social-tiny li {
+  padding: 0px;
+}
+.social-fb {
+  background-color: #3B5998;
+}
+.social-gp {
+  background-color: #d14836;
+}
+.social-tw {
+  background-color: #00aced;
 }

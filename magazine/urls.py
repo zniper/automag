@@ -16,7 +16,8 @@ urlpatterns = patterns('',
     url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),
     url(r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico')),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
-    url(r'^category/(?P<category>[a-zA-Z]+)/(?P<page>\d+)?/?$', CategoryView.as_view()),
+    url(r'^category/(?P<category>[a-zA-Z]+)/(?P<page>\d+)?/?$', CategoryView.as_view(),
+        name='category_view'),
     url(r'^tinymce/', include('tinymce.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

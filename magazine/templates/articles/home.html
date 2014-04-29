@@ -12,8 +12,8 @@
     {% for cat_latest in categories_latest %}
     <div class="col-sm-2 cat-block">
       <div class="cat-block-inner">
-        <div class="entry-category">{{ cat_latest.1 }}</div>
-        {% with article=cat_latest.2.0 %}
+        <div class="entry-category"><a href="{% url category_view cat_latest.1 %}">{{ cat_latest.2 }}</a></div>
+        {% with article=cat_latest.3.0 %}
           <div class="entry-cover">
           {% if article.attachments.count %}
             {% thumbnail article.attachments.all.0.attachment "165x100" crop="center" as thumb %}
@@ -40,11 +40,21 @@
     <div id="home-latests" class="col-sm-7">
         <h5>LATEST</h5>
         {% for article in latest %}
-        <div>
+        <div class="article-list-entry">
+            <div class="row entry-topline">
+               <h6 class="pull-left col-sm-6">
+                 {% for cat in article.categories.all %}{{ cat.name }}{% if not forloop.last %} &nbsp;&bull;&nbsp; {% endif %}{% endfor %}
+               </h6>
+               <ul class="social-tiny list-inline pull-right">
+                  <li><img class="social-fb" src="{{ STATIC_URL }}/img/social/facebook-16.png"></li>
+                  <li><img class="social-gp" src="{{ STATIC_URL }}/img/social/googleplus-16.png"></li>
+                  <li><img class="social-tw" src="{{ STATIC_URL }}/img/social/twitter-16.png"></li>
+               </ul>
+            </div>
             <div class="entry-title">
-            <a href="{{ article.get_absolute_url }}" title="{% trans 'Read this related article' %}">
-                <h4>{{ article.title|truncatewords:6 }}</h4>
-            </a> 
+                <a href="{{ article.get_absolute_url }}" title="{% trans 'Read this related article' %}">
+                    <h4>{{ article.title }}</h4>
+                </a> 
             </div>
             <div class="entry-cover">
             {% if article.attachments.count %}
