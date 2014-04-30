@@ -310,27 +310,45 @@ h5.box-header {
 
 .cat-block {
   display: block;
-  padding: 5px;
+  padding: 3px;
 }
 .cat-block-inner {
   background-color: #fafafa;
-  box-shadow: 1px 1px 4px #ccc;
-  -moz-box-shadow: 1px 1px 4px #ccc;
-  -webkit-box-shadow: 1px 1px 4px #ccc;
+  box-shadow: 1px 1px 4px #ddd;
+  -moz-box-shadow: 1px 1px 4px #ddd;
+  -webkit-box-shadow: 1px 1px 4px #ddd;
   padding: 5px 10px;
   overflow: hidden;
   min-height: 190px;
+  max-height: 190px;
 }
 #categories-latests {
   overflow: hidden;
   margin-bottom: 15px;
 }
 #home-latests {
-  background: #fafafa;
   padding: 5px 20px;
 }
-#home-latests h5 {
+#home-left {
+  padding: 5px 15px;
+}
+#home-right {
+  padding: 5px 15px;
+}
+.home-columns h5 {
   font-family: 'Quicksand Light';
+}
+.home-column {
+  background: #fcfcfc;
+  box-shadow: 1px 1px 4px #ddd;
+  -moz-box-shadow: 1px 1px 4px #ddd;
+  -webkit-box-shadow: 1px 1px 4px #ddd;
+}
+.home-columns > div:first-child {
+  padding-left: 0px;
+}
+.home-columns > div:last-child {
+  padding-right: 0px;
 }
 
 /* LIST VIEWS */

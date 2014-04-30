@@ -16,9 +16,9 @@
         {% with article=cat_latest.3.0 %}
           <div class="entry-cover">
           {% if article.attachments.count %}
-            {% thumbnail article.attachments.all.0.attachment "165x100" crop="center" as thumb %}
+            {% thumbnail article.attachments.all.0.attachment "168x100" crop="center" as thumb %}
               <a href="{{ article.get_absolute_url }}" title="{% trans 'Read this related article' %}">
-              <img src="{{ thumb.url }}">
+              <img class="thumbnail" src="{{ thumb.url }}">
               </a>
             {% endthumbnail %}
           {% endif %}
@@ -34,10 +34,21 @@
 
 <div class="row home-columns">
     <div class="col-sm-2">
-        Editor's pick
+      <div id="home-left" class="home-column">
+        <h5>FEATURED</h5>
+        <ul class="list-unstyled">
+          {% for article in latest %}
+            <li><span class="entry-title">{{ article.title }}</span></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div id="home-left" class="home-column">
+        <h5>FEATURED</h5>
+      </div>
     </div>
 
-    <div id="home-latests" class="col-sm-7">
+    <div id="home-latests" class="col-sm-7 home-column">
         <h5>LATEST</h5>
         {% for article in latest %}
         <div class="article-list-entry">
@@ -59,9 +70,7 @@
             <div class="entry-cover">
             {% if article.attachments.count %}
             {% thumbnail article.attachments.all.0.attachment "640x350" crop="center" as thumb %}
-                <a href="{{ article.get_absolute_url }}" title="{% trans 'Read this related article' %}">
-                <img src="{{ thumb.url }}">
-                </a>
+                <a href="{{ article.get_absolute_url }}" title=""> <img src="{{ thumb.url }}"> </a>
             {% endthumbnail %}
             {% endif %}
             </div>
@@ -72,7 +81,9 @@
     {% endfor %}
     </div>
     <div class="col-sm-3">
-        Right col
+      <div id="home-right" class="home-column">
+        <h5>SINGLE PICTURE</h5>
+      </div>
     </div>
 </div>
 

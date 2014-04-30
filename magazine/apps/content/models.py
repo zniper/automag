@@ -20,5 +20,15 @@ class Category(models.Model):
 
 
 class Article(CoreArticle):
-    """docstring for Article"""
     categories = models.ManyToManyField('Category')
+    featured = models.BooleanField(default=False)
+
+
+class SingleImage(models.Model):
+    upload_to = lambda inst, fn: 'attach/%s/%s/%s' % (datetime.now().year, inst.article.slug, fn)
+    attachment = models.FileField(upload_to=upload_to)
+    title = models.CharField(max_length=256, default='')
+    image = models.ImageField(upload_to=upload_to)
+    caption = models.TextField(blank=True)
+    author = models.CharField(max_length=128, blank=True)
+    date = models.DateField(blank=True, null=True)

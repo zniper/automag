@@ -12,7 +12,7 @@ from articles.admin import ArticleAdmin as CoreArticleAdmin
 from articles.forms import ArticleAdminForm, tag
 from articles import models as core_models
 
-from models import Article, Category
+from models import Article, Category, SingleImage
 
 log = logging.getLogger('articles.forms')
 
@@ -78,7 +78,7 @@ class ArticleAdmin(CoreArticleAdmin):
             'classes': ('collapse',)
         }),
         ('Advanced', {
-            'fields': ('slug', 'is_active', 'login_required', 'sites'),
+            'fields': ('slug', 'is_active', 'featured', 'login_required', 'sites'),
             'classes': ('collapse',)
         }),
     )
@@ -99,6 +99,7 @@ replace_model_admin(core_models.Article, (Article, ArticleAdmin))
 replace_model_admin(FlatPage, (FlatPage, PageAdmin))
 
 admin.site.register(Category)
+admin.site.register(SingleImage)
 
 #try:
 #    from articles.models import Article as CoreArticle
