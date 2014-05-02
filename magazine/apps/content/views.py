@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, TemplateView
 
-from models import Article, Category
+from models import Article, Category, SingleImage
 
 
 class CategoryView(ListView):
@@ -36,6 +36,14 @@ class HomeView(TemplateView):
 
         # get few latest articles
         latest = Article.objects.filter(status__is_live=True)
-        context['latest'] = latest.order_by('-publish_date')[:5]
+        context['latest_articles'] = latest.order_by('-publish_date')[:5]
+
+        # get featured  articles
+        latest = Article.objects.filter(status__is_live=True, featured=True)
+        context['featured_articles'] = latest.order_by('-publish_date')[:5]
+
+        # get few latest images
+        latest = SingleImage.objects.order_by('-publish_date')[:2]
+        context['latest_images'] = latest
 
         return context

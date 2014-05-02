@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 from articles.models import Article as CoreArticle
@@ -25,10 +27,12 @@ class Article(CoreArticle):
 
 
 class SingleImage(models.Model):
-    upload_to = lambda inst, fn: 'attach/%s/%s/%s' % (datetime.now().year, inst.article.slug, fn)
-    attachment = models.FileField(upload_to=upload_to)
+    upload_to = lambda inst, fn: 'attach/%s/%s/%s' % (datetime.now().year, datetime.now().month, fn)
     title = models.CharField(max_length=256, default='')
     image = models.ImageField(upload_to=upload_to)
     caption = models.TextField(blank=True)
     author = models.CharField(max_length=128, blank=True)
-    date = models.DateField(blank=True, null=True)
+    publish_date = models.DateTimeField(default=datetime.now())
+
+    def __unicode__(self):
+        return 'Image: '+self.title

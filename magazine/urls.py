@@ -10,7 +10,7 @@ from apps.content.views import CategoryView, HomeView
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', HomeView.as_view()),
+    url(r'^$', HomeView.as_view(), name='home'),
     url(r'^', include('articles.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^robots\.txt$', RedirectView.as_view(url='/static/robots.txt')),
