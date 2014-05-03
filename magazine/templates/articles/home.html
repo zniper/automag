@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<div id="categories-latests" class="row">
+<div id="categories-latests" class="row hidden-xs">
     {% for cat_latest in categories_latest %}
     <div class="col-sm-2 cat-block">
       <div class="cat-block-inner">
@@ -35,7 +35,7 @@
 </div>
 
 <div class="row home-columns">
-    <div class="col-sm-2">
+    <div class="col-md-2 hidden-sm hidden-xs">
       <div class="top-list home-column">
         <h5>MOST VISITED</h5>
         <ul class="article-list-noimage list-unstyled">
@@ -45,6 +45,9 @@
         </ul>
       </div>
 
+      <div class="home-column">
+        <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F9stuff&amdth&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=true&amp;stream=false&amp;show_border=true&amp;appId=757435387602275" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:62px;" allowTransparency="true"></iframe>
+      </div>
     </div>
 
     <div id="home-latests" class="col-sm-7 home-column">
@@ -61,11 +64,18 @@
                 {% endfor %}
                </h6>
                <ul class="social-tiny list-inline pull-right">
-                  <li><a target="blank" href="https://www.facebook.com/sharer.php?app_id=113869198637480&sdk=joey&u={{ request.build_absolute_uri|urlencode:"" }}{{ article.get_absolute_url|urlencode:"" }}&display=popup">
+               {% with request.build_absolute_uri|add:article.get_absolute_url|urlencode:"" as abs_url %}
+                  <li><a target="blank" href="https://www.facebook.com/sharer.php?app_id=113869198637480&sdk=joey&u={{ abs_url }}&display=popup">
                       <img class="social-fb" src="{{ STATIC_URL }}/img/social/facebook-16.png">
                   </a></li>
-                  <li><img class="social-gp" src="{{ STATIC_URL }}/img/social/googleplus-16.png"></li>
-                  <li><img class="social-tw" src="{{ STATIC_URL }}/img/social/twitter-16.png"></li>
+                  <li>
+                    <a target="blank" href="https://plus.google.com/share?url={{ abs_url }}">
+                      <img class="social-gp" src="{{ STATIC_URL }}/img/social/googleplus-16.png"></li>
+                    </a>
+                  <li><a href="http://twitter.com/share?url={{ abs_url }}">
+                    <img class="social-tw" src="{{ STATIC_URL }}/img/social/twitter-16.png">
+                  </a></li>
+               {% endwith %}
                </ul>
             </div>
             <div class="entry-title">
@@ -73,10 +83,10 @@
                     <h4>{{ article.title }}</h4>
                 </a> 
             </div>
-            <div class="entry-cover">
+            <div class="row entry-cover">
             {% if article.attachments.count %}
             {% thumbnail article.attachments.all.0.attachment "640x350" crop="center" as thumb %}
-                <a href="{{ article.get_absolute_url }}" title=""> <img src="{{ thumb.url }}"> </a>
+                <a href="{{ article.get_absolute_url }}" title=""> <img class="col-xs-12 col-sm-12" src="{{ thumb.url }}"> </a>
             {% endthumbnail %}
             {% endif %}
             </div>
@@ -85,8 +95,21 @@
             </div>
         </div>
     {% endfor %}
+
+        <!-- Place this tag where you want the +1 button to render. -->
+
+        <!-- Place this tag after the last +1 button tag. -->
+        <script type="text/javascript">
+        (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/platform.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
+        </script>
+
     </div>
-    <div class="col-sm-3">
+
+    <div class="col-sm-5 col-md-3 hidden-xs">
 
       <div class="top-list home-column">
         <h5>FEATURED</h5>
@@ -98,7 +121,7 @@
       </div>
 
 
-      <div id="column-image" class="">
+      <div id="column-image" class="row">
         <h5>PICTURES</h5>
         <ul class="image-list list-unstyled">
           {% for image in latest_images %}
@@ -106,7 +129,7 @@
             <div class="thumbnail">
                 {% thumbnail image.image "268" as thumb %}
                 <a href="{{ image.image.url }}" class="photoset" title="{{ image.title }}"> 
-                    <img src="{{ thumb.url }}"> 
+                    <img class="col-xs-12 col-sm-12" src="{{ thumb.url }}"> 
                 </a>
                 {% endthumbnail %}
                 <div class="simage-title">{{ image.title }}</div>
@@ -117,9 +140,6 @@
         </ul>
       </div>
 
-      <div class="home-column">
-        <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2F9stuff&amdth&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=true&amp;stream=false&amp;show_border=true&amp;appId=757435387602275" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:62px;" allowTransparency="true"></iframe>
-      </div>
 
     </div>
 </div>

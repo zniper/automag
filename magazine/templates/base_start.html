@@ -29,22 +29,22 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-    <div id="header" class="">
+    <div id="header" class="row">
 
       {% block top-banner %}
-        <div class="top-banner col-sm-12 col-md-12 col-lg-12">
+        <div class="top-banner col-xs-12">
            {% thumbnail 'http://'|add:request.get_host|add:STATIC_URL|add:'img/banner-0.jpg' "1170x130" crop="center 90%" as thumb %}
-           <img class="hidden-xs" src="{{ thumb.url }}"> 
+           <img src="{{ thumb.url }}"> 
            {% endthumbnail %}
         </div>
       {% endblock %}
 
       <div class="top-nav">
         <div class="container">
-            <div class="navbar-brand col-sm-1">
+            <div class="navbar-brand col-xs-2">
                 <a href="/">{% block site-name %}{% endblock %}</a>
             </div>
-            <div class="navbar-collapse collapse col-sm-11">
+            <div class="navbar-collapse collapse col-md-10">
                 <ul class="nav navbar-nav">
                     <li><a href="/category/news">News</a></li>
                     <li><a href="/category/culture">Culture</a></li>

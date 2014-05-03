@@ -29,9 +29,19 @@ class HomeView(TemplateView):
         # get 4 random latest articles of each category
         categories = Category.objects.all()
         cat_latest = []
+        sel_articles = []
         for cat in categories:
-            cat_latest.append((cat.id, cat.slug, cat.name,
-                               cat.get_latest_articles()))
+            try:
+                article = cat.get_latest_articles()
+                next_a = 1
+                while article[0].id in sel_articles:
+                    article = cat.get_latest_articles(next_a+1)[next_a:next_a+1]
+                if article[0].id not in sel_articles:
+                    sel_articles.append(article[0].id)
+                    cat_latest.append((cat.id, cat.slug, cat.name, article))
+            except:
+                pass
+
         context['categories_latest'] = cat_latest[:6]
 
         # get few latest articles

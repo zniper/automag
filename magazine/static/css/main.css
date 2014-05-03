@@ -316,6 +316,9 @@ h5.box-header {
 .entry-cover {
   margin: 10px 0;
 }
+.entry-cover img {
+  padding: 0px;
+}
 .simage-title {
   font-size: 12px;
   padding-bottom: 10px;
@@ -395,13 +398,9 @@ h5.box-header {
 .image-list li {
   margin-bottom: 10px;
 }
-.image-thumb img {
-  border: solid 1px #fff;
+.image-list img {
+  padding: 0px;
 }
-.image-thumb {
-  text-align: center;
-}
-
 /* LIST VIEWS */
 
 .article-list-noimage li {
