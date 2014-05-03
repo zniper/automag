@@ -377,7 +377,7 @@ h5.box-header {
   -webkit-box-shadow: 1px 1px 4px #ddd;
   margin-bottom: 15px;
 }
-.home-column ul {
+.home-column > ul {
   margin: 0 -10px;
 }
 .top-list {

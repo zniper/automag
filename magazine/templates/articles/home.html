@@ -105,7 +105,9 @@
           <li>
             <div class="thumbnail">
                 {% thumbnail image.image "268" as thumb %}
-                <a href="" title="{{ image.title }}"> <img src="{{ thumb.url }}"> </a>
+                <a href="{{ image.image.url }}" class="photoset" title="{{ image.title }}"> 
+                    <img src="{{ thumb.url }}"> 
+                </a>
                 {% endthumbnail %}
                 <div class="simage-title">{{ image.title }}</div>
                 <div class="simage-caption">{{ image.caption|truncatewords:30 }}</div>

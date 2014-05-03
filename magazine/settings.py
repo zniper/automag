@@ -196,11 +196,12 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 TINYMCE_SPELLCHECKER = False
 
-# COMPRESSOR 
+# COMPRESSOR
 
 COMPRESS_ROOT = STATICFILES_DIRS[0]
 
 try:
     from local_settings import *
+    INSTALLED_APPS += DEV_APPS
 except ImportError:
     pass

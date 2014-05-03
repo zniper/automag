@@ -3,9 +3,11 @@
 
 <div class="entry-small clearfix">
     <div class="entry-images col-xs-3 col-sm-3">
+      <a href="{{ article.get_absolute_url }}" title="{{ article.title }}">
       {% thumbnail article.attachments.all.0.attachment "90x70" crop="top" as thumb %}  
         <img src="{{ thumb.url }}">
       {% endthumbnail %}
+      </a>
     </div>
     <div class="entry-title col-xs-9 col-sm-9">
         <a href="{{ article.get_absolute_url }}" title="{% trans 'Read this related article' %}">{{ article.title }}</a> 
