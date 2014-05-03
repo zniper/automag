@@ -18,7 +18,7 @@
         {% with article=cat_latest.3.0 %}
           <div class="entry-cover">
           {% if article.attachments.count %}
-            {% thumbnail article.attachments.all.0.attachment "168x100" crop="center" as thumb %}
+            {% thumbnail article.attachments.all.0.attachment "200x115" crop="center" as thumb %}
               <a href="{{ article.get_absolute_url }}" title="{% trans 'Read this related article' %}">
               <img class="thumbnail" src="{{ thumb.url }}">
               </a>
