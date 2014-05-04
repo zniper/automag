@@ -41,10 +41,19 @@
 
       <div class="top-nav">
         <div class="container">
-            <div class="navbar-brand col-xs-2">
-                <a href="/">{% block site-name %}{% endblock %}</a>
+
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="site-brand">
+                    <a href="/">{% block site-name %}{% endblock %}</a>
+                </div>
             </div>
-            <div class="navbar-collapse collapse col-md-10">
+            <div class="navbar-collapse collapse bs-navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
                     <li><a href="/category/news">News</a></li>
                     <li><a href="/category/culture">Culture</a></li>

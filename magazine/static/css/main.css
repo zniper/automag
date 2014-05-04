@@ -217,21 +217,23 @@ footer > div {
   margin-left: 0px;
   margin-right: 0px;
 }
-#header .top-nav a {
-  padding-top: 11px;
-  padding-bottom: 11px;
-}
 .top-nav ul {
   font-family: AftaSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
-.top-nav .navbar-brand {
-  padding: 11px 0px;
-  font-size: 18px;
-  font-weight: bold;
+.site-brand {
+  padding: 10px;
+  font-size: 16px;
+  margin: 0 10px 0 -10px;
 }
 .top-nav .navbar-nav a {
   color: #03137E;
+  font-size: 13px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.top-nav .navbar-nav li {
+  padding: 5px;
 }
 #big-boss {
   margin-top: 15px;
