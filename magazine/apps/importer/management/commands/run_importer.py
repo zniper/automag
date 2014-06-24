@@ -11,7 +11,6 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         """ Run import for all new directories """
         content_dirs = get_content_dirs()
-        print content_dirs
         for uid in filter_new_content(content_dirs.keys()):
             import_content(content_dirs[uid])
 

@@ -38,6 +38,8 @@ class ImportProxy(models.Model):
         attach = Attachment(article=self.article)
         attach.attachment = File(attach_file)
         attach.attachment.name = file_name
+        if len(caption) > 255:
+            caption = caption[:caption[:250].rfind(' ')] + '...'
         attach.caption = caption
         attach.save()
         return attach.attachment.name
@@ -65,9 +67,9 @@ class ImportProxy(models.Model):
         with self.open_file(META_FILE) as metafile:
             meta = json.load(metafile)
             article = Article(
-                title=meta['title'][0] or 'Untitled',
-                description=meta['description'][0] or '',
-                keywords=meta['keywords'][0] or '',
+                title=''.join(meta['title']) or 'Untitled',
+                description=''.join(meta['description']) or '',
+                keywords=''.join(meta['keywords']) or '',
                 content=content,
                 use_addthis_button=False,
                 author_id=1,
