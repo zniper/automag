@@ -19,14 +19,14 @@ IMAGE_SLOT = '[{%d}]'
 rg_image = re.compile(r'<img\s*.*?\/>')
 
 
-class ImportedArticle(models.Model):
+class ImportProxy(models.Model):
     """ Marking the articles have been imported from local """
-    url = models.CharField(max_length=256)
+    local_path = models.CharField(max_length=256)
+    url = models.CharField(max_length=256, blank=True, null=True)
     uid = models.CharField(max_length=128, blank=True, null=True)
     article = models.ForeignKey(Article, blank=True, null=True)
     import_time = models.DateTimeField(default=datetime.now, blank=True,
                                        null=True)
-    local_path = models.CharField(max_length=256)
 
     def open_file(self, path):
         """ Return file handler inside local path """
@@ -94,3 +94,6 @@ class ImportedArticle(models.Model):
         # update the article content
         article.content = self.make_image_slots(content)
         article.save()
+
+    def __unicode__(self):
+        return 'Import Proxy: %s' % self.article.title
