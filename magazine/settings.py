@@ -145,11 +145,12 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'gunicorn',
     'south',
-    'apps.content',
     'articles',
     'tinymce',
     'compressor',
     'sorl.thumbnail',
+    'apps.content',
+    'apps.importer',
 )
 
 # A sample logging configuration. The only tangible logging
