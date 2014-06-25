@@ -10,7 +10,9 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         """ Run import for all new directories """
+        print 'Crawling local content directories'
         content_dirs = get_content_dirs()
+        print 'Start importing new content'
         for uid in filter_new_content(content_dirs.keys()):
             import_content(content_dirs[uid])
 

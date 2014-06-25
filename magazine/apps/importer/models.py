@@ -84,13 +84,12 @@ class ImportProxy(models.Model):
             self.save()
 
         # Import attachments/images
-        filelist = os.listdir(self.local_path)
-        filelist.remove(INDEX_FILE)
-        filelist.remove(META_FILE)
-        captions = meta.get('images', {})
-        for fname in filelist:
-            at_file = self.open_file(fname)
-            self.add_attachment(at_file, caption=captions.get(fname, ''))
+        images_meta = meta.get('images', [])
+        # Getting file list from directory may cause wrong order when importing
+        #filelist = os.listdir(self.local_path)
+        for meta in images_meta:
+            at_file = self.open_file(meta[0])
+            self.add_attachment(at_file, caption=meta[1]['caption'])
             at_file.close()
 
         # update the article content
