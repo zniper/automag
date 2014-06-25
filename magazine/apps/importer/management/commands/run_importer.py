@@ -1,4 +1,5 @@
 import os
+import logging
 
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
@@ -6,14 +7,20 @@ from django.core.management.base import NoArgsCommand
 from apps.importer.models import ImportProxy
 
 
+logger = logging.getLogger('importer')
+
+
 class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         """ Run import for all new directories """
-        print 'Crawling local content directories'
+        logger.info('')
+        logger.info('Start loading content from: %s' % settings.AUTO_IMPORT_ROOT)
         content_dirs = get_content_dirs()
-        print 'Start importing new content'
-        for uid in filter_new_content(content_dirs.keys()):
+        new_dirs = filter_new_content(content_dirs.keys())
+        logger.info('Found %d item(s), with %d new' %
+                    (len(content_dirs), len(new_dirs)))
+        for uid in new_dirs:
             import_content(content_dirs[uid])
 
 
@@ -37,9 +44,9 @@ def filter_new_content(id_list):
 
 def import_content(dirpath):
     """ Just like the function name... """
-    print 'Start importing %s' % dirpath
+    logger.info('Import %s' % dirpath)
     try:
         importer = ImportProxy(local_path=dirpath)
         importer.perform_import()
     except:
-        print 'Error when importing %s' % dirpath
+        logger.error('Error when importing %s' % dirpath)
