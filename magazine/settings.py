@@ -184,6 +184,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': 'logs/importer.log',
+            'formatter': 'simple'
         },
         'mail_admins': {
             'level': 'ERROR',
