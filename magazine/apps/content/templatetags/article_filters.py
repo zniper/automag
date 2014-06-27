@@ -34,7 +34,7 @@ def insert_article_images(value, article):
         try:
             attc = attachments[int(pk)]
             thumb = get_thumbnail(attc.attachment, settings.ARTICLE_IMAGE_SIZE,
-                                  upscale=False, quality=80)
+                                  upscale=False, quality=99)
             url = thumb.url
             caption = attc.caption
         except ValueError:
