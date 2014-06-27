@@ -1,8 +1,11 @@
 from datetime import datetime
 
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 from articles.models import Article as CoreArticle
+from articles.models import Attachment
 
 
 class Category(models.Model):
@@ -36,3 +39,8 @@ class SingleImage(models.Model):
 
     def __unicode__(self):
         return 'Image: '+self.title
+
+
+@receiver(pre_delete, sender=Attachment)
+def delete_mediafiles(sender, instance, **kwargs):
+    instance.attachment.delete(False)

@@ -25,7 +25,8 @@ class ImportProxy(models.Model):
     local_path = models.CharField(max_length=256)
     url = models.CharField(max_length=256, blank=True, null=True)
     uid = models.CharField(max_length=128, blank=True, null=True)
-    article = models.ForeignKey(Article, blank=True, null=True)
+    article = models.ForeignKey(Article, blank=True, null=True,
+                                on_delete=models.SET_NULL)
     import_time = models.DateTimeField(default=datetime.now, blank=True,
                                        null=True)
 
@@ -98,4 +99,5 @@ class ImportProxy(models.Model):
         article.save()
 
     def __unicode__(self):
-        return 'Import Proxy: %s' % self.article.title
+        desc = self.article.title if self.article else self.url
+        return 'Import Proxy: %s' % desc
