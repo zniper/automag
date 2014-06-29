@@ -45,7 +45,7 @@ class Article(CoreArticle):
         counter = 1
 
         while True:
-            if len(slug) > 50:
+            while len(slug) > 50:
                 slug = '-'.join(slug.split('-')[:-1])
 
             not_unique = Article.objects.all()
@@ -56,7 +56,7 @@ class Article(CoreArticle):
             if len(not_unique) == 0:
                 return slug
 
-            slug = '%s-%s' % (orig_slug, counter)
+            slug = '%s%s' % (slug, counter)
             counter += 1
 
 
