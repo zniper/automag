@@ -14,6 +14,7 @@ DEFAULT_DB = getattr(settings, 'ARTICLES_DEFAULT_DB', 'default')
 
 class Category(models.Model):
     name = models.CharField(max_length=128)
+    slug = models.CharField(max_length=128)
     description = models.TextField(blank=True)
 
     class Meta:
