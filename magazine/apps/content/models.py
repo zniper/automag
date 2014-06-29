@@ -46,7 +46,7 @@ class Article(CoreArticle):
 
         while True:
             if len(slug) > 50:
-                slug = slug[:48]
+                slug = '-'.join(slug.split('-')[:-1])
 
             not_unique = Article.objects.all()
             if hasattr(not_unique, 'using'):
