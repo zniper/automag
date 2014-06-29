@@ -26,6 +26,12 @@ class Category(models.Model):
         qset = Article.objects.filter(categories=self, status__is_live=True)
         return qset.order_by('-publish_date')[:number]
 
+
+
+class Article(CoreArticle):
+    categories = models.ManyToManyField('Category')
+    featured = models.BooleanField(default=False)
+
     def get_unique_slug(self, slug, using=DEFAULT_DB):
         """Iterates until a unique slug is found"""
 
@@ -51,12 +57,6 @@ class Category(models.Model):
 
             slug = '%s-%s' % (orig_slug, counter)
             counter += 1
-
-
-class Article(CoreArticle):
-    slug = models.SlugField(max_length=255, unique_for_year='publish_date')
-    categories = models.ManyToManyField('Category')
-    featured = models.BooleanField(default=False)
 
 
 class SingleImage(models.Model):
