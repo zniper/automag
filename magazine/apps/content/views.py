@@ -37,8 +37,6 @@ class HomeView(TemplateView):
                 while article[0].id in sel_articles:
                     next_a += 1
                     article = cat.get_latest_articles(next_a)[next_a-1:next_a]
-                    if not article:
-                        break
                 if article[0].id not in sel_articles:
                     sel_articles.append(article[0].id)
                     cat_latest.append((cat.id, cat.slug, cat.name, article))
