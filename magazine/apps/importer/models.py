@@ -81,8 +81,10 @@ class ImportProxy(models.Model):
             caption=self.meta.get('description')[0],
             author=self.meta.get('credit')[0],
             )
-        imgfile = self.open_file(self.meta.get('extras')[0])
+        file_name = self.meta.get('extras')[0]
+        imgfile = self.open_file(file_name)
         simage.image = File(imgfile)
+        simage.image.name = os.path.basename(simage.image.name)
         simage.save()
 
     @commit_on_success

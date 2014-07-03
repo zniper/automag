@@ -67,6 +67,7 @@ class SingleImage(models.Model):
     caption = models.TextField(blank=True)
     author = models.CharField(max_length=128, blank=True)
     publish_date = models.DateTimeField(default=datetime.now())
+    published = models.BooleanField(default=False, blank=True)
 
     def __unicode__(self):
         return 'Image: '+self.title

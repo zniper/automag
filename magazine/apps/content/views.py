@@ -54,7 +54,8 @@ class HomeView(TemplateView):
         context['featured_articles'] = latest.order_by('-publish_date')[:5]
 
         # get few latest images
-        latest = SingleImage.objects.order_by('-publish_date')[:2]
+        latest = SingleImage.objects.filter(published=True)
+        latest = latest.order_by('-publish_date')[:2]
         context['latest_images'] = latest
 
         return context
