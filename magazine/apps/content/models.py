@@ -63,7 +63,7 @@ class Article(CoreArticle):
 class SingleImage(models.Model):
     upload_to = lambda inst, fn: 'attach/%s/%s/%s' % (datetime.now().year, datetime.now().month, fn)
     title = models.CharField(max_length=256, default='')
-    image = models.ImageField(upload_to=upload_to)
+    image = models.ImageField(upload_to=upload_to, max_length=256)
     caption = models.TextField(blank=True)
     author = models.CharField(max_length=128, blank=True)
     publish_date = models.DateTimeField(default=datetime.now())
