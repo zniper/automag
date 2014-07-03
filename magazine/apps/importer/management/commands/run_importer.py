@@ -1,4 +1,5 @@
 import os
+import traceback
 import logging
 
 from django.conf import settings
@@ -50,3 +51,4 @@ def import_content(dirpath):
         importer.perform_import()
     except:
         logger.error('Error when importing %s' % dirpath)
+        traceback.print_exc()

@@ -11,7 +11,7 @@ from django.core.files import File
 from django.conf import settings
 
 from articles.models import Attachment
-from apps.content.models import Article
+from apps.content.models import Article, SingleImage
 
 
 INDEX_FILE = 'index.html'
@@ -32,7 +32,7 @@ class ImportProxy(models.Model):
 
     def open_file(self, path):
         """ Return file handler inside local path """
-        return open(os.path.join(self.local_path, path), 'r')
+        return open(os.path.join(self.local_path, path), 'rb')
 
     def add_attachment(self, attach_file, caption=''):
         """ Add attach_file to the article """
@@ -54,44 +54,67 @@ class ImportProxy(models.Model):
             count += 1
         return content
 
-    @commit_on_success
     def perform_import(self):
         """ Create new article base on local files """
         if not os.path.exists(self.local_path):
             return False
+        with self.open_file(META_FILE) as metafile:
+            self.meta = json.load(metafile)
+        if self.meta.has_key('type') and self.meta.get('type').lower() == 'image':
+            self.import_single_image()
+        else:
+            self.import_article()
 
+        # Create proxy object
+        with self.open_file(META_FILE) as metafile:
+            self.meta = json.load(metafile)
+            # Update import object
+            self.uid = self.meta['hash']
+            self.url = self.meta['url']
+            self.save()
+
+    @commit_on_success
+    def import_single_image(self):
+        """ Create new single image base on local files """
+        simage = SingleImage(
+            title=self.meta.get('title')[0],
+            caption=self.meta.get('description')[0],
+            author=self.meta.get('credit')[0],
+            )
+        imgfile = self.open_file(self.meta.get('extras')[0])
+        simage.image = File(imgfile)
+        simage.save()
+
+    @commit_on_success
+    def import_article(self):
+        """ Create new article base on local files """
         # Load HTML content from local file
         index_file = self.open_file(INDEX_FILE)
         content = index_file.read()
         index_file.close()
 
-        # Load metadata and create new article
-        with self.open_file(META_FILE) as metafile:
-            meta = json.load(metafile)
-            article = Article(
-                title=''.join(meta['title']) or 'Untitled',
-                description=''.join(meta['description']) or '',
-                keywords=''.join(meta['keywords']) or '',
-                content=content,
-                use_addthis_button=False,
-                author_id=1,
-                addthis_username='',
-                )
-            article.save()
+        # Create new article
+        article = Article(
+            title=''.join(self.meta['title']) or 'Untitled',
+            description=''.join(self.meta['description']) or '',
+            keywords=''.join(self.meta['keywords']) or '',
+            content=content,
+            use_addthis_button=False,
+            author_id=1,
+            addthis_username='',
+            )
+        article.save()
 
-            # Update import object
-            self.article = article
-            self.uid = meta['hash']
-            self.url = meta['url']
-            self.save()
+        # Update import object
+        self.article = article
 
         # Import attachments/images
-        images_meta = meta.get('images', [])
+        images_meta = self.meta.get('images', [])
         # Getting file list from directory may cause wrong order when importing
         #filelist = os.listdir(self.local_path)
-        for meta in images_meta:
-            at_file = self.open_file(meta[0])
-            self.add_attachment(at_file, caption=meta[1]['caption'])
+        for imeta in images_meta:
+            at_file = self.open_file(imeta[0])
+            self.add_attachment(at_file, caption=imeta[1]['caption'])
             at_file.close()
 
         # update the article content
