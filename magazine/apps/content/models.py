@@ -70,7 +70,8 @@ class SingleImage(models.Model):
     published = models.BooleanField(default=False, blank=True)
 
     def __unicode__(self):
-        return 'Image: '+self.title
+        status = 'Published' if self.published else 'Draft'
+        return 'Image: %s (%s)' % (self.title, status)
 
 
 @receiver(pre_delete, sender=Attachment)
