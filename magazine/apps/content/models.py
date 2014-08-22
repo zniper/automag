@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 from articles.models import Article as CoreArticle
 from articles.models import Attachment
@@ -90,4 +91,5 @@ def publish_new_article(sender, instance, **kwargs):
     if instance.status.is_live:
         #message = '%s - %s' % (instance.title, instance.description)
         message = ''
-        write_facebook_status(message, instance.get_absolute_url())
+        article_url = reverse('article-by-id', kwargs={'pk': instance.pk})
+        write_facebook_status(message, article_url)

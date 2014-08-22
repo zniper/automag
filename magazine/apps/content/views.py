@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, RedirectView
+from django.shortcuts import get_object_or_404
 
 from models import Article, Category, SingleImage
 
@@ -59,3 +60,9 @@ class HomeView(TemplateView):
         context['latest_images'] = latest
 
         return context
+
+
+class ArticleViewById(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        article = get_object_or_404(Article, pk=kwargs.get('pk', None))
+        return article.get_absolute_url()

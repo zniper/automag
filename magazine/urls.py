@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import RedirectView, TemplateView
 
-from apps.content.views import CategoryView, HomeView
+from apps.content.views import CategoryView, HomeView, ArticleViewById
 
 
 admin.autodiscover()
@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^category/(?P<category>[a-zA-Z]+)/(?P<page>\d+)?/?$', CategoryView.as_view(),
         name='category_view'),
     url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^article/(?P<pk>\d+)/$', ArticleViewById.as_view(), name='article-by-id'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
