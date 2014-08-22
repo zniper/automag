@@ -22,11 +22,8 @@ def build_url(path):
 def write_facebook_status(message, link, picture=''):
     """ Post a link and message to Facebook page or timeline """
     link = build_url(link)
-    if picture:
-        picture = build_url(picture)
-    message += ' ('+link+')'
     try:
         fb = OpenFacebook(settings.FACEBOOK_ACCESS_TOKEN)
-        fb.set('me/feed', message=message, url=link, picture=picture)
+        fb.set('me/feed', message=message, link=link)
     except:
         logger.error('Error when posting to Facebook page')

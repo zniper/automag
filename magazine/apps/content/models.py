@@ -86,10 +86,5 @@ def delete_mediafiles(sender, instance, **kwargs):
 @receiver(post_save, sender=Article)
 def publish_new_article(sender, instance, **kwargs):
     if instance.status.is_live:
-        try:
-            photo = instance.attachments.all()[0]
-            photo_url = photo.attachment.url()
-        except:
-            photo_url = ''
         message = '%s - %s' % (instance.title, instance.description)
-        write_facebook_status(message, instance.get_absolute_url(), photo_url)
+        write_facebook_status(message, instance.get_absolute_url())
