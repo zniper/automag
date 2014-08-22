@@ -41,7 +41,7 @@
         </div>
         {% endif %}
 
-        {% if article.get_previous_article %}
+        {% if article.get_previous_article and article.get_previous_article != article.get_next_article %}
         <div class="previous-article">
             <span class="glyphicon glyphicon-chevron-left"></span>
             <a class="entry-title" href="{{ article.get_previous_article.get_absolute_url }}">{{ article.get_previous_article.title|truncatewords:7 }}</a>

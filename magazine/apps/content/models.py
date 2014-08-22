@@ -76,6 +76,8 @@ class SingleImage(models.Model):
         return 'Image: %s (%s)' % (self.title, status)
 
 
+
+
 # MODEL SIGNAL RECEIVERS
 
 @receiver(pre_delete, sender=Attachment)
@@ -86,5 +88,6 @@ def delete_mediafiles(sender, instance, **kwargs):
 @receiver(post_save, sender=Article)
 def publish_new_article(sender, instance, **kwargs):
     if instance.status.is_live:
-        message = '%s - %s' % (instance.title, instance.description)
+        #message = '%s - %s' % (instance.title, instance.description)
+        message = ''
         write_facebook_status(message, instance.get_absolute_url())
