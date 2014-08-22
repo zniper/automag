@@ -238,6 +238,7 @@ COMPRESS_ROOT = STATICFILES_DIRS[0]
 # IMPORTER
 AUTO_IMPORT_ROOT = ''
 
+
 try:
     from local_settings import *
     INSTALLED_APPS += DEV_APPS

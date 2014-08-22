@@ -1,12 +1,14 @@
 from datetime import datetime
 
 from django.db import models
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.conf import settings
 
 from articles.models import Article as CoreArticle
 from articles.models import Attachment
+
+from utils import write_facebook_status
 
 
 DEFAULT_DB = getattr(settings, 'ARTICLES_DEFAULT_DB', 'default')
@@ -74,6 +76,20 @@ class SingleImage(models.Model):
         return 'Image: %s (%s)' % (self.title, status)
 
 
+# MODEL SIGNAL RECEIVERS
+
 @receiver(pre_delete, sender=Attachment)
 def delete_mediafiles(sender, instance, **kwargs):
     instance.attachment.delete(False)
+
+
+@receiver(post_save, sender=Article)
+def publish_new_article(sender, instance, **kwargs):
+    if instance.status.is_live:
+        try:
+            photo = instance.attachments.all()[0]
+            photo_url = photo.attachment.url()
+        except:
+            photo_url = ''
+        message = '%s - %s' % (instance.title, instance.description)
+        write_facebook_status(message, instance.get_absolute_url(), photo_url)
