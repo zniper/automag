@@ -25,8 +25,7 @@ def write_facebook_status(message, link, picture=''):
     try:
         fb = OpenFacebook(settings.FACEBOOK_ACCESS_TOKEN)
         # request to scrape url first
-
-        res = fb.set('?id=%s&scrape=true' % link)
+        res = fb.set('/', id=link, scrape=True)
         if res['id']:
             fb.set('me/feed', message=message, link=link)
         else:
