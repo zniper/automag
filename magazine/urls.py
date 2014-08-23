@@ -3,9 +3,9 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.views.generic import RedirectView, TemplateView
+from django.views.generic import RedirectView
 
-from apps.content.views import CategoryView, HomeView, ArticleViewById
+from apps.content.views import CategoryView, HomeView
 
 
 admin.autodiscover()
@@ -20,7 +20,6 @@ urlpatterns = patterns('',
     url(r'^category/(?P<category>[a-zA-Z]+)/(?P<page>\d+)?/?$', CategoryView.as_view(),
         name='category_view'),
     url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^article/(?P<pk>\d+)/$', ArticleViewById.as_view(), name='article-by-id'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
@@ -47,7 +46,7 @@ urlpatterns += patterns('',
 )
 
 
-# TINYMCE 
+# TINYMCE
 # -------
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table,paste,searchreplace",

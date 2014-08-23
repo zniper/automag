@@ -77,8 +77,6 @@ class SingleImage(models.Model):
         return 'Image: %s (%s)' % (self.title, status)
 
 
-
-
 # MODEL SIGNAL RECEIVERS
 
 @receiver(pre_delete, sender=Attachment)
@@ -91,5 +89,5 @@ def publish_new_article(sender, instance, **kwargs):
     if instance.status.is_live:
         #message = '%s - %s' % (instance.title, instance.description)
         message = ''
-        article_url = reverse('article-by-id', kwargs={'pk': instance.pk})
+        article_url = instance.get_absolute_url()
         write_facebook_status(message, article_url)

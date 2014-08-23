@@ -24,6 +24,12 @@ def write_facebook_status(message, link, picture=''):
     link = build_url(link)
     try:
         fb = OpenFacebook(settings.FACEBOOK_ACCESS_TOKEN)
-        fb.set('me/feed', message=message, link=link)
+        # request to scrape url first
+
+        res = fb.set('?id=%s&scrape=true' % link)
+        if res['id']:
+            fb.set('me/feed', message=message, link=link)
+        else:
+            raise
     except:
         logger.error('Error when posting to Facebook page')
